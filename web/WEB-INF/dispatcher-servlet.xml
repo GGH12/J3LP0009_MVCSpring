@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <map>
+                <entry key="">
+                    <ref bean="loginPage"/>
+                </entry>
+                <entry key="loginForm">
+                    <ref bean="loginController"/>
+                </entry>
+                <entry key="logOutForm">
+                    <ref bean="logOutController"/>
+                </entry>
+                <entry key="searchInfoForm">
+                    <ref bean="searchValueController"/>
+                </entry>
+                <entry key="searchInfoForOtherRolesForm">
+                    <ref bean="searchValueForOtherController"/>
+                </entry>
+                <entry key="loginGoogleForm">
+                    <ref bean="loginWithGoogleController"/>
+                </entry>
+                <entry key="loginFacebookForm">
+                    <ref bean="loginWithFacebookController"/>
+                </entry>
+                <entry key="signUpForm">
+                    <ref bean="signUpController"/>
+                </entry>
+                <entry key="signUpPage">
+                    <ref bean="signUpController"/>
+                </entry>
+                <entry key="addToCartForm">
+                    <ref bean="addToCartController"/>
+                </entry>
+                <entry key="confirmCodeForm">
+                    <ref bean="confirmCodeController"/>
+                </entry>
+                <entry key="checkOutCartForm">
+                    <ref bean="checkOutCartController"/>
+                </entry>
+                <entry key="updateQuantityCartForm">
+                    <ref bean="addToCartController"/>
+                </entry>
+                <entry key="showCartPage">
+                    <ref bean="loginPage"/>
+                </entry>
+                <entry key="loginPage">
+                    <ref bean="loginPage"/>
+                </entry>
+                <entry key="confirmCodePage">
+                    <ref bean="loginPage"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <!--
+    The index controller.
+    -->
+    <bean name="loginPage" 
+          class="hunggg.controllers.MainController"/>
+    <bean name="loginController"
+          class="hunggg.controllers.LoginController"/>
+    <bean name="searchValueController" 
+          class="hunggg.controllers.SearchItemController"/>
+    <bean name="searchValueForOtherController" 
+          class="hunggg.controllers.SearchItemForOtherRolesController"/>
+    <bean name="logOutController" 
+          class="hunggg.controllers.LogOutController"/>
+    <bean name="signUpController"
+          class="hunggg.controllers.SignUpController"/>
+    <bean name="addToCartController"
+          class="hunggg.controllers.AddToCartController"/>
+    <bean name="confirmCodeController"
+          class="hunggg.controllers.ConfirmCodeController"/>
+    <bean name="checkOutCartController"
+          class="hunggg.controllers.CheckOutCartController"/>
+    <bean name="loginWithGoogleController"
+          class="hunggg.controllers.LoginWithGoogleController"/>
+    <bean name="loginWithFacebookController"
+          class="hunggg.controllers.LoginWithFacebookController"/>
+</beans>
